@@ -11,6 +11,6 @@ public class Pago {
     private double monto;
     private String mesReferencia;
     private LocalDate fechaPago;
-    private String metodoPago;
+    private MetodoPago metodoPago;
     private String notas;
 }

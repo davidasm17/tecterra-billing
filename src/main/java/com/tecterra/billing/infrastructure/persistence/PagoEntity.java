@@ -2,6 +2,8 @@ package com.tecterra.billing.infrastructure.persistence;
 
 import java.time.LocalDate;
 
+import com.tecterra.billing.domain.models.MetodoPago;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +36,7 @@ public class PagoEntity {
     private LocalDate fechaPago;
 
     @Column(name = "METODO_PAGO", length = 30)
-    private String metodoPago;
+    private MetodoPago metodoPago;
 
     @Column(name = "NOTAS", length = 255)
     private String notas;
