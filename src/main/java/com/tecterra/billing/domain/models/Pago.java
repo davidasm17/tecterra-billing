@@ -2,6 +2,9 @@ package com.tecterra.billing.domain.models;
 
 import java.time.LocalDate;
 
+import lombok.Data;
+
+@Data
 public class Pago {
     private Long id;
     private Long clienteId;
