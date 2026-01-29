@@ -26,6 +26,9 @@ public class PagoController {
     public ResponseEntity<String> registrarPago(@Valid @RequestBody PagoRequest request) {
         log.info("Entrando al Controller");
         log.info("Registrando pago para el cliente: {}", request.getClienteId());
+
+        Double costoPlan = request.getPlan().getPrecio();
+        String descripcionPlan = request.getPlan().getDescripcion();
         Pago pago = new Pago();
         pago.setClienteId(request.getClienteId());
         pago.setMonto(request.getMonto());
@@ -35,7 +38,10 @@ public class PagoController {
         registrarPago.ejecutar(pago);
         log.info("Pago registrado exitosamente");
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Pago registrado exitosamente para el cliente: " + request.getClienteId());
+                .body(String.format("Pago de $%.2f recibido para el plan %s (%s)",
+                        request.getMonto(),
+                        request.getPlan().getDescripcion(),
+                        request.getPlan().getPrecio()));
     }
 
 }

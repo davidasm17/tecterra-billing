@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Tecterra Billing & Network API
+  description: Sistema centralizado para el cobro de servicios WISP/CCTV y automatización de cortes en Mikrotik.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Servidor Local de Desarrollo
+
+paths:
+  /pagos:
+    post:
+      summary: Registrar un nuevo pago
+      operationId: registrarPago
+      tags:
+        - Pagos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PagoRequest'
+      responses:
+        '201':
+          description: Pago procesado y guardado exitosamente.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Pago registrado exitosamente para el cliente 1"
+        '400':
+          description: Error de validación o datos inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    PagoRequest:
+      type: object
+      required: [clienteId, monto, mesReferencia, metodoPago]
+      properties:
+        clienteId:
+          type: integer
+          format: int64
+          example: 125
+        monto:
+          type: number
+          format: double
+          minimum: 0.01
+          example: 350.00
+        mesReferencia:
+          type: string
+          pattern: '^[a-z]{3}-\d{2}$'
+          description: "Formato de mes corto y año (ej: oct-25)"
+          example: "oct-25"
+        metodoPago:
+          $ref: '#/components/schemas/MetodoPago'
+        notas:
+          type: string
+          maxLength: 255
+          example: "Pago en efectivo en oficina"
+
+    MetodoPago:
+      type: string
+      enum: [EFECTIVO, MERCADO_PAGO, TRANSFERENCIA, TARJETA_DEBITO, TARJETA_CREDITO]
+
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        validations:
+          type: object
+          additionalProperties:
+            type: string
+          description: "Mapa de campos con error y su descripción"

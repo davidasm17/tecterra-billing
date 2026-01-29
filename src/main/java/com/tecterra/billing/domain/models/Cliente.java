@@ -1,7 +1,5 @@
 package com.tecterra.billing.domain.models;
 
-import java.util.List;
-
 public class Cliente {
     private Long id;
     private String nombre;

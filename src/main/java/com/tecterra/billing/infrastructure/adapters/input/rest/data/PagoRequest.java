@@ -1,6 +1,7 @@
 package com.tecterra.billing.infrastructure.adapters.input.rest.data;
 
 import com.tecterra.billing.domain.models.MetodoPago;
+import com.tecterra.billing.domain.models.Plan;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +17,9 @@ public class PagoRequest {
 
     @Positive(message = "El monto debe ser mayor a cero")
     private Double monto;
+
+    @NotNull(message = "El plan es obligatorio")
+    private Plan plan;
 
     @NotBlank(message = "El mes de referencia no puede estar vacío")
     @Pattern(regexp = "^[a-z]{3}-\\d{2}$", message = "Formato inválido. Use ej: oct-25")
