@@ -39,9 +39,7 @@ public class PagoController {
         log.info("Pago registrado exitosamente");
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(String.format("Pago de $%.2f recibido para el plan %s (%s)",
-                        request.getMonto(),
-                        request.getPlan().getDescripcion(),
-                        request.getPlan().getPrecio()));
+                        request.getMonto(), request.getPlan(), descripcionPlan));
     }
 
 }

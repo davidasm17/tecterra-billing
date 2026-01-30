@@ -29,7 +29,7 @@ public class RegistrarPagoService implements CasoUsoRegistrarPago {
             log.info("Cliente {} ha pagado su plan completo", pago.getClienteId());
             log.info("Enviando señal a MikroTik para activar servicio");
         } else {
-            log.info("Pago parcial recibido. Saldo restante: " + (costoPlan - totalPagado));
+            log.info("Pago parcial recibido. Saldo restante: {}", costoPlan - totalPagado);
         }
     }
 

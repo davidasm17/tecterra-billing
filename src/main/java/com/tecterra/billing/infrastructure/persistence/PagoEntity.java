@@ -6,6 +6,8 @@ import com.tecterra.billing.domain.models.MetodoPago;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +28,7 @@ public class PagoEntity {
     @Column(name = "CLIENTE_ID", nullable = false)
     private Long clienteId;
 
-    @Column(name = "MONTO", precision = 10, scale = 2)
+    @Column(name = "MONTO")
     private Double monto;
 
     @Column(name = "MES_REFERENCIA", length = 10)
@@ -36,6 +38,7 @@ public class PagoEntity {
     private LocalDate fechaPago;
 
     @Column(name = "METODO_PAGO", length = 30)
+    @Enumerated(EnumType.STRING)
     private MetodoPago metodoPago;
 
     @Column(name = "NOTAS", length = 255)

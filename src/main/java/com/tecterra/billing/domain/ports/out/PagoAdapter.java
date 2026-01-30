@@ -1,15 +1,15 @@
-package com.tecterra.billing.domain.ports.out.impl;
+package com.tecterra.billing.domain.ports.out;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.tecterra.billing.domain.models.Pago;
-import com.tecterra.billing.domain.ports.out.PagoRepositoryData;
-import com.tecterra.billing.domain.ports.out.PagoRepositoryPort;
 import com.tecterra.billing.infrastructure.persistence.PagoEntity;
 import com.tecterra.billing.infrastructure.persistence.PagoMapper;
+import com.tecterra.billing.infrastructure.persistence.repositories.PagoRepositoryData;
 
 import lombok.RequiredArgsConstructor;
 
